@@ -36,7 +36,7 @@ async function dialogflow_req(query_text) {
 
 function bot_run(){
 // get the lastest post from devforum
-    request('http://devforum.zoom.us/posts.json', function (error, response, body) {
+    request('discourse-link-for-latest-posts', function (error, response, body) {
         let latest_posts = JSON.parse(body).latest_posts;
         let topics = new Set();
         let categories = new Set([8])
@@ -57,11 +57,11 @@ function bot_run(){
                         console.log(` Dialogflow Response : ${response}`)
                         let response_options = {
                             'method': 'POST',
-                            'url': 'https://devforum.zoom.us/posts',
+                            'url': 'discourse-link-for-latest-posts',
                             'headers': {
                                 'Content-Type': 'application/x-www-form-urlencoded',
                                 'Api-Key': 'your discourse api key',
-                                'Api-Username': "your discourse username"
+                                'Api-Username': "your-discourse-api-key"
                             },
                             formData: {
                                 'topic_id': topic_id,
